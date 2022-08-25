@@ -1,15 +1,15 @@
 job "keycloak" {
   type = "service"
   datacenters = [
-    "dc1"]
+    "toronto"]
 
   group "keycloak" {
     count = 1
 
     network {
+      mode = "host"
       port "http"  { to = 8080 }
       port "https"  { to = 8443 }
-
     }
 
     volume "keycloak-vol" {
@@ -28,7 +28,7 @@ job "keycloak" {
       }
 
       config {
-        image = "jboss/keycloak:10.0.1"
+        image = "quay.io/keycloak/keycloak:15.1.1"
         ports = [
           "http",
           "https"
